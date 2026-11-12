@@ -1,0 +1,40 @@
+# --- Python bytecode and caches ---
+__pycache__/
+*.py[cod]
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# --- Build and packaging artifacts ---
+build/
+dist/
+*.egg-info/
+
+# --- Test coverage reports ---
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# --- Virtual environments ---
+.venv/
+venv/
+
+# --- Documentation build output (MkDocs) ---
+site/
+
+# --- Notebooks and editors ---
+.ipynb_checkpoints/
+.vscode/
+.idea/
+
+# --- OS files ---
+.DS_Store
+Thumbs.db
+
+# --- Local working notes (not part of the project) ---
+.claude/
+PROJECT_GUIDE.md
+PREMIER_MESSAGE.md
+LISEZ-MOI_KIT.md
+docs/journal/
