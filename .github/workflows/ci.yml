@@ -34,13 +34,18 @@ jobs:
       - name: Mypy
         run: mypy src/chartrank
 
-  # Job 2: tests, run once per supported Python version (the matrix).
+  # Job 2: tests. Every Python version on Linux, plus the oldest one
+  # on Windows and macOS (paths, encodings and line endings differ there).
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: false  # let every version finish, even if one fails
+      fail-fast: false  # let every combination finish, even if one fails
       matrix:
+        os: [ubuntu-latest]
         python-version: ["3.11", "3.12", "3.13", "3.14"]
+        include:
+          - { os: windows-latest, python-version: "3.11" }
+          - { os: macos-latest, python-version: "3.11" }
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
