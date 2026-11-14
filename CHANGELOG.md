@@ -15,3 +15,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Continuous integration (GitHub Actions): ruff, mypy, and pytest with coverage
   ≥ 85 % on Python 3.11 to 3.14 (Linux) and 3.11 (Windows, macOS), with
   network access disabled during tests.
+- Documentation skeleton (MkDocs Material, English and French) published to
+  GitHub Pages; new `[docs]` extra.

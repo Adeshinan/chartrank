@@ -1,6 +1,9 @@
 # ChartRank
 
 [![CI](https://github.com/Adeshinan/chartrank/actions/workflows/ci.yml/badge.svg)](https://github.com/Adeshinan/chartrank/actions/workflows/ci.yml)
+[![Docs](https://github.com/Adeshinan/chartrank/actions/workflows/docs.yml/badge.svg)](https://adeshinan.github.io/chartrank/fr/)
+![Python](https://img.shields.io/badge/python-3.11%20%7C%203.12%20%7C%203.13%20%7C%203.14-blue)
+[![Licence : MIT](https://img.shields.io/badge/licence-MIT-green)](LICENSE)
 
 **Propose et explique le bon graphique selon vos données et votre intention.**
 
@@ -23,4 +26,5 @@ print(g.best.code)
 
 *Cette API est l'objectif de la v1.0 et n'est pas encore disponible.*
 
+[Documentation](https://adeshinan.github.io/chartrank/fr/) ·
 [English version](README.md) · Licence : [MIT](LICENSE)
