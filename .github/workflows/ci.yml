@@ -1,0 +1,58 @@
+name: CI
+
+# When to run: on every push to main and on every pull request.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# The workflow only needs to read the code.
+permissions:
+  contents: read
+
+# If a new commit arrives on the same branch, cancel the previous run.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Job 1: style and types, checked once (they do not depend on the Python version).
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install
+        run: pip install -e ".[dev]"
+      - name: Ruff (lint)
+        run: ruff check .
+      - name: Ruff (format)
+        run: ruff format --check .
+      - name: Mypy
+        run: mypy src/chartrank
+
+  # Job 2: tests. Every Python version on Linux, plus the oldest one
+  # on Windows and macOS (paths, encodings and line endings differ there).
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false  # let every combination finish, even if one fails
+      matrix:
+        os: [ubuntu-latest]
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
+        include:
+          - { os: windows-latest, python-version: "3.11" }
+          - { os: macos-latest, python-version: "3.11" }
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - name: Install
+        run: pip install -e ".[dev]"
+      - name: Pytest (no network, coverage >= 85 %)
+        run: pytest --disable-socket --cov=chartrank --cov-report=term-missing --cov-fail-under=85
