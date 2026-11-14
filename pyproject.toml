@@ -82,7 +82,7 @@ strict = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "-ra"
+addopts = "-ra --disable-socket"  # no network during tests (ENF-05)
 
 [tool.coverage.run]
 source = ["chartrank"]

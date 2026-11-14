@@ -1,5 +1,7 @@
 # ChartRank
 
+[![CI](https://github.com/Adeshinan/chartrank/actions/workflows/ci.yml/badge.svg)](https://github.com/Adeshinan/chartrank/actions/workflows/ci.yml)
+
 **Suggests and explains the right chart for your data and intent.**
 
 > 🚧 Work in progress — v1.0 planned for December 2026.
