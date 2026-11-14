@@ -1,0 +1,70 @@
+site_name: ChartRank
+site_description: Suggests and explains the right chart for your data and intent.
+site_author: Faïd Adéshinan ALAGBE
+site_url: https://adeshinan.github.io/chartrank/
+repo_url: https://github.com/Adeshinan/chartrank
+repo_name: Adeshinan/chartrank
+copyright: Copyright &copy; 2026 Faïd Adéshinan ALAGBE · MIT License
+
+# Project documents that live in docs/ but are not part of the website.
+exclude_docs: |
+  spec/
+  journal/
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+    - content.code.copy
+  palette:
+    # Light / dark mode toggle
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+plugins:
+  - search
+  - i18n:
+      docs_structure: folder  # one folder per language: docs/en, docs/fr
+      languages:
+        - locale: en
+          name: English
+          default: true
+          build: true
+        - locale: fr
+          name: Français
+          build: true
+          nav_translations:
+            Home: Accueil
+            Getting started: Démarrage
+            Intents: Intentions
+            Chart catalog: Catalogue des graphiques
+            Guard rules: Règles de garde
+            Target analysis: Analyse de la cible
+            API reference: Référence de l'API
+
+nav:
+  - Home: index.md
+  - Getting started: getting-started.md
+  - Intents: intents.md
+  - Chart catalog: catalog.md
+  - Guard rules: guard-rules.md
+  - Target analysis: target-analysis.md
+  - API reference: api.md
+  - FAQ: faq.md
+
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.superfences

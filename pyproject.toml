@@ -47,7 +47,11 @@ dev = [
     "mypy>=1.11",
     "pandas-stubs>=2.2",
     "types-PyYAML>=6.0",
+    "chartrank[docs]",  # dev also installs the docs tools
+]
+docs = [
     "mkdocs-material>=9.5",
+    "mkdocs-static-i18n>=1.2",
 ]
 
 [project.urls]

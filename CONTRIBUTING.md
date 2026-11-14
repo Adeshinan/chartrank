@@ -21,6 +21,18 @@ mypy src/chartrank
 pytest
 ```
 
+## Documentation
+
+The documentation lives in `docs/en` and `docs/fr` (one Markdown file per page,
+same file names in both languages). Preview it locally with:
+
+```bash
+mkdocs serve
+```
+
+then open <http://127.0.0.1:8000>. Check it before a pull request with
+`mkdocs build --strict`.
+
 ## Conventions
 
 - One change per branch: `feat/…`, `fix/…`, `docs/…`, `test/…`, `chore/…`.
