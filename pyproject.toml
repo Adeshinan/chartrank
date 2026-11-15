@@ -11,7 +11,7 @@ build-backend = "hatchling.build"
 [project]
 name = "chartrank"
 dynamic = ["version"]  # read from src/chartrank/__init__.py (see [tool.hatch.version])
-description = "Suggests and explains the right chart for your data and intent."
+description = "Early preview, not ready for use. Suggests and explains the right chart for your data and intent."
 readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE"]
@@ -47,6 +47,8 @@ dev = [
     "mypy>=1.11",
     "pandas-stubs>=2.2",
     "types-PyYAML>=6.0",
+    "build>=1.2",
+    "twine>=6.0",
     "chartrank[docs]",  # dev also installs the docs tools
 ]
 docs = [
@@ -68,6 +70,10 @@ path = "src/chartrank/__init__.py"
 [tool.hatch.build.targets.wheel]
 packages = ["src/chartrank"]
 
+[tool.hatch.build.targets.sdist]
+# Source archive: code, tests and the files a packager needs, nothing else.
+include = ["src/", "tests/", "README.md", "README.fr.md", "LICENSE", "CHANGELOG.md"]
+
 # ---------------------------------------------------------------------------
 # Tools
 # ---------------------------------------------------------------------------
@@ -85,8 +91,10 @@ python_version = "3.11"
 strict = true
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
-addopts = "-ra --disable-socket"  # no network during tests (ENF-05)
+testpaths = ["src", "tests"]
+# -ra: summary of skipped/failed tests; --disable-socket: no network (ENF-05);
+# --doctest-modules: the examples in docstrings are run as tests.
+addopts = "-ra --disable-socket --doctest-modules"
 
 [tool.coverage.run]
 source = ["chartrank"]
