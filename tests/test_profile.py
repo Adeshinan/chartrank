@@ -1,4 +1,4 @@
-"""Tests for the minimal profile (task 0.4): dtype, missing share, distinct count."""
+"""Tests for profile(): semantic type and indicators of each column (EF-02, EF-03)."""
 
 import numpy as np
 import pandas as pd
@@ -22,7 +22,7 @@ def passengers() -> pd.DataFrame:
 def test_one_row_per_column_in_original_order(passengers: pd.DataFrame) -> None:
     result = cr.profile(passengers)
     assert list(result.index) == ["Pclass", "Sex", "Age"]
-    assert list(result.columns) == ["dtype", "missing", "distinct"]
+    assert list(result.columns) == ["type", "dtype", "missing", "distinct", "skew"]
 
 
 def test_dtype(passengers: pd.DataFrame) -> None:
@@ -55,6 +55,50 @@ def test_input_dataframe_is_not_modified(passengers: pd.DataFrame) -> None:
     before = passengers.copy()
     cr.profile(passengers)
     pd.testing.assert_frame_equal(passengers, before)
+
+
+def test_skew_only_for_numeric_columns(passengers: pd.DataFrame) -> None:
+    result = cr.profile(passengers)
+    # skew needs at least 3 values: Pclass has 4 (Age has only 2 here)
+    assert not np.isnan(result.loc["Pclass", "skew"])
+    assert np.isnan(result.loc["Sex", "skew"])
+
+
+# ---------------------------------------------------------------------------
+# Titanic: the reference profile expected by task 1.1
+# ---------------------------------------------------------------------------
+TITANIC_TYPES = {
+    "PassengerId": "id",
+    "Survived": "boolean",
+    "Pclass": "discrete",
+    "Name": "text",
+    "Sex": "category",
+    "Age": "continuous",
+    "SibSp": "discrete",
+    "Parch": "discrete",
+    "Ticket": "high_cardinality",
+    "Fare": "continuous",
+    "Cabin": "high_cardinality",
+    "Embarked": "category",
+}
+
+
+@pytest.mark.parametrize(("column", "expected"), TITANIC_TYPES.items())
+def test_titanic_types(titanic: pd.DataFrame, column: str, expected: str) -> None:
+    assert cr.profile(titanic).loc[column, "type"] == expected
+
+
+def test_titanic_indicators(titanic: pd.DataFrame) -> None:
+    result = cr.profile(titanic)
+    assert result.loc["Age", "missing"] == pytest.approx(0.199, abs=0.001)
+    assert result.loc["Cabin", "missing"] == pytest.approx(0.771, abs=0.001)
+    assert result.loc["Fare", "skew"] == pytest.approx(4.79, abs=0.01)
+
+
+def test_titanic_is_not_modified(titanic: pd.DataFrame) -> None:
+    before = titanic.copy()
+    cr.profile(titanic)
+    pd.testing.assert_frame_equal(titanic, before)
 
 
 def test_rejects_non_dataframe_with_clear_message() -> None:
