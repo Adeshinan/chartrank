@@ -192,9 +192,9 @@ Le catalogue v1.0 est volontairement court : une dizaine de types bien faits plu
 
 | x | y | Intention | Candidats (★ en premier) |
 | --- | --- | --- | --- |
-| Catégorie | Numérique | compare | ★ boîtes à moustaches · violons · barres de médiane avec intervalle · points superposés (strip) |
+| Catégorie | Numérique | compare | ★ boîtes à moustaches · violons · barres de médiane avec écart interquartile (sans tirage aléatoire, décision du 20 nov.) · points superposés (strip) |
 | Catégorie | Numérique | distribution | ★ histogrammes superposés · courbes de densité par groupe |
-| Numérique | Numérique | relationship | ★ nuage de points · hexbin (gros volumes) · nuage + droite de tendance |
+| Numérique | Numérique | relationship | ★ nuage de points · histogramme 2D `density_heatmap` (gros volumes ; Plotly n'a pas de hexbin natif, décision du 20 nov.) · nuage + droite de tendance |
 | Catégorie | Catégorie | compare / composition | ★ barres groupées · barres empilées 100 % · carte de chaleur des effectifs |
 | Date | Numérique | trend | ★ courbe · courbe + moyenne glissante · aire (si cumul) |
 | Date | Catégorie | composition | ★ aires empilées 100 % · barres empilées par période |

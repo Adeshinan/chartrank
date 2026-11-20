@@ -46,7 +46,7 @@ def test_plot_type(semantic_type: str, n_distinct: int, expected: str | None) ->
         ),
         (
             ("numeric", "numeric", "relationship"),
-            ["scatter", "hexbin", "scatter_trend"],
+            ["scatter", "density_heatmap", "scatter_trend"],
         ),
         (
             ("category", "category", "compare"),
@@ -63,7 +63,7 @@ def test_plot_type(semantic_type: str, n_distinct: int, expected: str | None) ->
         ),
         (
             ("numeric", "boolean", "compare"),
-            ["box_by_class", "histogram_overlay", "rate_by_bin"],
+            ["box_by_class", "histogram_by_class", "rate_by_bin"],
         ),
     ],
 )
