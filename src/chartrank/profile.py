@@ -11,6 +11,8 @@ from typing import Any, cast
 import numpy as np
 import pandas as pd
 
+from chartrank._validation import check_dataframe
+
 #: Semantic types that ``detect_type`` can return.
 SEMANTIC_TYPES = (
     "id",
@@ -134,11 +136,7 @@ def profile(df: pd.DataFrame) -> pd.DataFrame:
     Raises:
         TypeError: If ``df`` is not a pandas DataFrame.
     """
-    if not isinstance(df, pd.DataFrame):
-        raise TypeError(
-            f"profile() expects a pandas DataFrame, got {type(df).__name__}. "
-            "Convert your data first, e.g. pd.DataFrame(data) or pd.read_csv(path)."
-        )
+    check_dataframe(df, "profile")
 
     n_rows = len(df)
     rows = {}

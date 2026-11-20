@@ -10,28 +10,28 @@ Les exigences EF-xx / ENF-xx sont dans `docs/spec/cahier_des_charges.md`.
 
 ## Phase 0 · Mise en place (14–15 nov.)
 
-### [ ] 0.1 · Créer le dépôt et la structure du paquet — 14 nov.
+### [x] 0.1 · Créer le dépôt et la structure du paquet — 14 nov.
 - **Branche** : premier commit sur `main`, puis `chore/setup` · **Mode** : rapide, avec explication de chaque fichier
 - **Notions** : layout `src/`, `pyproject.toml` (build backend, dépendances, extras), installation éditable (`pip install -e`), environnement virtuel.
 - **Attendu** : `pyproject.toml` (nom `chartrank`, MIT, Python ≥ 3.11, build backend hatchling, deps pandas/numpy/plotly/pyyaml, extras `[static]` = kaleido, `[dev]` = pytest, pytest-cov, ruff, mypy, mkdocs-material) ; modules vides avec docstring : `profile.py`, `dictionary.py`, `catalog.py`, `guards.py`, `recommend.py`, `spec.py`, `target.py`, `gallery.py`, `codegen.py`, `cli.py`, `render/plotly.py` ; `tests/`, `docs/en`, `docs/fr`, `examples/`, `README.md`, `README.fr.md`, `LICENSE`, `CHANGELOG.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `.github/ISSUE_TEMPLATE/`.
 - **Tester** : `pip install -e ".[dev]"` puis `python -c "import chartrank; print(chartrank.__version__)"` → `0.1.0`.
 - **Fini quand** : installable dans un environnement neuf.
 
-### [ ] 0.2 · CI GitHub Actions — 14 nov.
+### [x] 0.2 · CI GitHub Actions — 14 nov.
 - **Branche** : `chore/ci` · **Mode** : rapide, puis me faire lire le workflow ligne par ligne
 - **Notions** : GitHub Actions (workflow, job, matrice), ruff, mypy, couverture, test sans réseau (`pytest-socket`).
 - **Attendu** : `ci.yml` sur push/PR : `ruff check`, `ruff format --check`, `mypy src/chartrank`, `pytest --cov=chartrank --cov-fail-under=85` sur Python 3.11–3.14, tests avec `--disable-socket`.
 - **Tester** : une PR avec un fichier mal formaté doit échouer, puis passer une fois corrigée.
 - **Fini quand** : badge CI vert dans le README.
 
-### [ ] 0.3 · Squelette de la documentation EN/FR et du README — 15 nov.
+### [x] 0.3 · Squelette de la documentation EN/FR et du README — 15 nov.
 - **Branche** : `docs/skeleton` · **Mode** : rapide
 - **Notions** : MkDocs Material, i18n, GitHub Pages.
 - **Attendu** : pages vides *Getting started, Intents, Chart catalog, Guard rules, Target analysis, API reference, FAQ* (EN + FR) ; README avec phrase d'accroche, badges, « Work in progress — v1.0 planned for December 2026 » ; `CONTRIBUTING.md` ; modèles d'issues (bug, proposition de graphique).
 - **Tester** : `mkdocs build --strict`.
 - **Fini quand** : le site est en ligne (même vide).
 
-### [ ] 0.4 · Réserver le nom : publier `chartrank 0.1.0` — 15 nov.
+### [x] 0.4 · Réserver le nom : publier `chartrank 0.1.0` — 15 nov.
 - **Branche** : `chore/release-workflow`, puis tag `v0.1.0` (c'est moi qui pousse le tag) · **Mode** : binôme
 - **Notions** : build d'un paquet (`python -m build`), PyPI, Trusted Publishing, SemVer, CHANGELOG.
 - **Attendu** : `release.yml` déclenché par un tag `v*` ; `cr.profile(df)` minimal (dtype, manquants, distincts) ; description PyPI « Early preview, not ready for use ».
@@ -44,7 +44,7 @@ Les exigences EF-xx / ENF-xx sont dans `docs/spec/cahier_des_charges.md`.
 
 > **Replanification du 20 nov.** (4 jours de retard) : 1.1 et 1.2 restent en mode guide ; 1.3 et 1.4 passent en mode **rapide** ; la décision 1.5 est décalée au **25 nov.**
 
-### [ ] 1.1 · Profileur v0 : types sémantiques — 20 nov.
+### [x] 1.1 · Profileur v0 : types sémantiques — 20 nov.
 - **Branche** : `feat/profiler` · **Mode** : guide · **Exigences** : EF-02, EF-03, EF-06
 - **Notions** : types sémantiques vs dtypes pandas, asymétrie (*skewness*), cardinalité, tests paramétrés pytest.
 - **Attendu** : types `continuous`, `discrete`, `category`, `high_cardinality`, `ordinal`, `boolean`, `date`, `id`, `text`, avec seuils dans `THRESHOLDS`. Sur Titanic : PassengerId=id, Survived=boolean, Pclass=discrete, Sex=category, Age=continuous (19,9 % manquants), Fare=continuous (skew ≈ 4,79), Cabin=high_cardinality (77,1 % manquants).
