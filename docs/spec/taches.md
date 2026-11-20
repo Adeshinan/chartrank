@@ -40,39 +40,42 @@ Les exigences EF-xx / ENF-xx sont dans `docs/spec/cahier_des_charges.md`.
 
 ---
 
-## Phase 1 · Prototype + décision (16–20 nov.)
+## Phase 1 · Prototype + décision (16–25 nov.)
 
-### [ ] 1.1 · Profileur v0 : types sémantiques — 16 nov.
+> **Replanification du 20 nov.** (4 jours de retard) : 1.1 et 1.2 restent en mode guide ; 1.3 et 1.4 passent en mode **rapide** ; la décision 1.5 est décalée au **25 nov.**
+
+### [ ] 1.1 · Profileur v0 : types sémantiques — 20 nov.
 - **Branche** : `feat/profiler` · **Mode** : guide · **Exigences** : EF-02, EF-03, EF-06
 - **Notions** : types sémantiques vs dtypes pandas, asymétrie (*skewness*), cardinalité, tests paramétrés pytest.
 - **Attendu** : types `continuous`, `discrete`, `category`, `high_cardinality`, `ordinal`, `boolean`, `date`, `id`, `text`, avec seuils dans `THRESHOLDS`. Sur Titanic : PassengerId=id, Survived=boolean, Pclass=discrete, Sex=category, Age=continuous (19,9 % manquants), Fare=continuous (skew ≈ 4,79), Cabin=high_cardinality (77,1 % manquants).
 - **Tester** : un DataFrame par type ; colonne vide / constante / 100 % manquante ; DataFrame inchangé (ENF-03).
 - **Fini quand** : le profil Titanic sort comme ci-dessus.
 
-### [ ] 1.2 · `ChartSpec` + catalogue v0 (2 variables) — 17 nov.
+### [ ] 1.2 · `ChartSpec` + catalogue v0 (2 variables) — 21 nov.
 - **Branche** : `feat/chartspec-catalog` · **Mode** : guide · **Exigences** : EF-21 à EF-23, EF-50
 - **Notions** : `dataclass(frozen=True)`, objets immuables et hashables, table déclarative (données plutôt que `if/else`).
 - **Attendu** : `ChartSpec(kind, x, y, intent, transforms=(), title="", rank=0)` ; `CATALOG[(type_x, type_y, intent)] = [kinds…]` pour les 7 lignes de la section 6.2 ; `recommend(df, x, y, intent)` → liste ordonnée, le premier `rank=1`.
+- **Règle** : un `discrete` avec ≤ 10 valeurs distinctes se dessine comme une catégorie (cahier, section 6, décision du 16 nov.).
 - **Tester** : chaque ligne du catalogue ; `trend` sans date → `ValueError` listant les intentions possibles (EF-25).
 - **Fini quand** : `recommend(titanic, "Pclass", "Fare", "compare")` → box ★, violin, bar_median, strip.
 
-### [ ] 1.3 · Rendu Plotly brut + `suggest().show()` — 18 nov.
-- **Branche** : `feat/plotly-prototype` · **Mode** : binôme · **Exigences** : EF-51, EF-52
+### [ ] 1.3 · Rendu Plotly brut + `suggest().show()` — 22–23 nov.
+- **Branche** : `feat/plotly-prototype` · **Mode** : rapide (replanification du 20 nov.) · **Exigences** : EF-51, EF-52
 - **Notions** : `plotly.express` vs `graph_objects`, `make_subplots`, affichage dans un notebook.
 - **Attendu** : une fonction par `kind` (`ChartSpec` + df → `go.Figure`) ; objet galerie avec `.show()`, `.best`, `g[i]`, `len(g)`.
 - **Tester** : chaque `kind` construit une figure avec au moins une trace ; `examples/prototype.ipynb` sur Titanic + Iris/penguins.
 - **Fini quand** : le notebook montre au moins 10 paires.
 
-### [ ] 1.4 · 30 paires de référence + test humain — 19 nov.
-- **Branche** : `test/golden-pairs` · **Mode** : binôme (le test humain, c'est moi)
+### [ ] 1.4 · 30 paires de référence + test humain — 23–24 nov.
+- **Branche** : `test/golden-pairs` · **Mode** : rapide (replanification du 20 nov. ; le test humain, c'est moi)
 - **Notions** : tests « golden » (de référence), évaluation par des humains, biais d'ordre (montrer les propositions dans le désordre).
 - **Attendu** : `tests/golden/pairs.yaml` (30 paires sur 4–5 petits jeux, toutes intentions, champ `human_star`) ; test à 3–5 personnes sans afficher la ★ ; `test_golden.py` qui affiche le taux d'accord.
 - **Fini quand** : taux d'accord connu, désaccords notés.
 
-### [ ] 1.5 · Décision go / ajuster / réduire — 20 nov.
+### [ ] 1.5 · Décision go / ajuster / réduire — 25 nov.
 - **Branche** : `docs/decision-v1` · **Mode** : discussion
 - **Règle** : ≥ 60 % et retours positifs → go ; 40–60 % → ajuster l'ordre du catalogue puis go ; < 40 % → réduire (galerie sans ★) ou repenser.
-- **Fini quand** : `docs/decisions/2026-11-20-go.md` écrit (taux, 3 désaccords, citations, décision).
+- **Fini quand** : `docs/decisions/2026-11-25-go.md` écrit (taux, 3 désaccords, citations, décision).
 
 ---
 

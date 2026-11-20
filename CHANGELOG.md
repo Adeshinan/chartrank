@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `profile(df)` now reports the semantic type of each column (`id`, `boolean`,
+  `date`, `ordinal`, `discrete`, `continuous`, `category`, `high_cardinality`,
+  `text`, `empty`, `constant`) and the skewness of numeric columns.
+- `detect_type(series, thresholds=)` and the `THRESHOLDS` dictionary of
+  detection thresholds.
+
 ## [0.1.0] - 2026-11-15
 
 Early preview to reserve the name on PyPI. Not ready for use.

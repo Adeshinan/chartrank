@@ -170,6 +170,13 @@ Chaque exigence porte un identifiant (EF-xx) pour être reliée aux tickets et a
 
 Le catalogue v1.0 est volontairement court : une dizaine de types bien faits plutôt que trente approximatifs. Chaque ligne donne les candidats dans l'ordre par défaut ; le premier reçoit ★, sauf si une règle de garde en décide autrement.
 
+**Du type détecté au type « de dessin »** (décision du 16 nov. 2026). Le profileur décrit ce qu'il voit ; le catalogue décide comment dessiner :
+
+- un numérique **discret avec ≤ 10 valeurs distinctes** (ex. `Pclass`, `SibSp`) se dessine comme une **catégorie** ; au-delà, comme un **numérique** ;
+- **ordinal** et **booléen** se dessinent comme une **catégorie** dans le tableau 6.2 (l'ordinal garde son ordre naturel) ;
+- **continu** se dessine comme un **numérique** ;
+- le type peut toujours être forcé, par ordre de priorité : `types=` > dictionnaire de données > détection automatique.
+
 ### 6.1 Une variable
 
 | Type de variable | Intention | Candidats (★ en premier) |
