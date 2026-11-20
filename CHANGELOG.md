@@ -21,6 +21,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `recommend(df, x, y, intent)`: ranked charts, ★ first; swaps x and y when
   only the reverse order exists; clear errors with suggestions for unknown
   columns or intents, and the list of possible intents (EF-25).
+- `suggest(df, x, y, intent)` returns a `Gallery`: `g.show()` (grid of charts,
+  ★ first, no widget), `g.best`, `g[i]`, `len(g)`; each `Chart` has a real
+  Plotly `.figure`, drawn on first use.
+- Plotly renderer for the 20 chart kinds of the two-variable catalog
+  (prototype look, theme in a later version).
+- `examples/prototype.ipynb`: 14 pairs on Titanic, Palmer penguins and a
+  sales series.
+
+### Changed
+
+- Chart kind `hexbin` renamed `density_heatmap` (Plotly has no native
+  hexbin); numeric × boolean overlaid histograms renamed `histogram_by_class`.
+- Median bars show the interquartile range (no random resampling).
 
 ## [0.1.0] - 2026-11-15
 

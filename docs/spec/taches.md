@@ -51,7 +51,7 @@ Les exigences EF-xx / ENF-xx sont dans `docs/spec/cahier_des_charges.md`.
 - **Tester** : un DataFrame par type ; colonne vide / constante / 100 % manquante ; DataFrame inchangé (ENF-03).
 - **Fini quand** : le profil Titanic sort comme ci-dessus.
 
-### [ ] 1.2 · `ChartSpec` + catalogue v0 (2 variables) — 21 nov.
+### [x] 1.2 · `ChartSpec` + catalogue v0 (2 variables) — 21 nov.
 - **Branche** : `feat/chartspec-catalog` · **Mode** : guide · **Exigences** : EF-21 à EF-23, EF-50
 - **Notions** : `dataclass(frozen=True)`, objets immuables et hashables, table déclarative (données plutôt que `if/else`).
 - **Attendu** : `ChartSpec(kind, x, y, intent, transforms=(), title="", rank=0)` ; `CATALOG[(type_x, type_y, intent)] = [kinds…]` pour les 7 lignes de la section 6.2 ; `recommend(df, x, y, intent)` → liste ordonnée, le premier `rank=1`.
@@ -102,7 +102,7 @@ Les exigences EF-xx / ENF-xx sont dans `docs/spec/cahier_des_charges.md`.
 ### [ ] 2.4 · Règles de garde — 26–27 nov.
 - **Branche** : `feat/guards` · **Mode** : guide · **Exigences** : EF-30 à EF-35
 - **Notions** : pourquoi chaque règle (échelle log, surimpression des points, ordre naturel), ordre d'application des règles.
-- **Attendu** : une fonction par règle : `skewed_log` (asym. > 2, valeurs > 0), `top_n` (> 10), `overplotting` (> 5 000 pts → hexbin ★), `small_n` (< 30 → strip), `imbalanced` (groupe < 5 %), `natural_order`, `missing_note`, `forbidden` (3D, double axe, camembert > 5 parts).
+- **Attendu** : une fonction par règle : `skewed_log` (asym. > 2, valeurs > 0), `top_n` (> 10), `overplotting` (> 5 000 pts → histogramme 2D `density_heatmap` ★), `small_n` (< 30 → strip), `imbalanced` (groupe < 5 %), `natural_order`, `missing_note`, `forbidden` (3D, double axe, camembert > 5 parts).
 - **Tester** : un cas qui déclenche et un qui ne déclenche pas, pour chaque règle ; Titanic Fare par classe → log + boîte ★.
 - **Fini quand** : accord golden **≥ 70 %**, test golden rendu **bloquant**.
 

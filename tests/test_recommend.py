@@ -38,7 +38,7 @@ def test_boolean_drawn_as_category(titanic: pd.DataFrame) -> None:
 
 def test_numeric_vs_boolean_has_its_own_row(titanic: pd.DataFrame) -> None:
     specs = recommend(titanic, "Fare", "Survived", "compare")
-    assert kinds(specs) == ["box_by_class", "histogram_overlay", "rate_by_bin"]
+    assert kinds(specs) == ["box_by_class", "histogram_by_class", "rate_by_bin"]
 
 
 def test_relationship_between_two_numbers(titanic: pd.DataFrame) -> None:

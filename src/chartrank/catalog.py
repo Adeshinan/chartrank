@@ -34,14 +34,18 @@ _CAT_CAT = ("grouped_bar", "stacked_bar_100", "count_heatmap")
 CATALOG: dict[tuple[str, str, str], tuple[str, ...]] = {
     ("category", "numeric", "compare"): ("box", "violin", "bar_median", "strip"),
     ("category", "numeric", "distribution"): ("histogram_overlay", "density_by_group"),
-    ("numeric", "numeric", "relationship"): ("scatter", "hexbin", "scatter_trend"),
+    ("numeric", "numeric", "relationship"): (
+        "scatter",
+        "density_heatmap",
+        "scatter_trend",
+    ),
     ("category", "category", "compare"): _CAT_CAT,
     ("category", "category", "composition"): _CAT_CAT,
     ("date", "numeric", "trend"): ("line", "line_rolling", "area"),
     ("date", "category", "composition"): ("stacked_area_100", "stacked_bar_period"),
     ("numeric", "boolean", "compare"): (
         "box_by_class",
-        "histogram_overlay",
+        "histogram_by_class",
         "rate_by_bin",
     ),
 }
