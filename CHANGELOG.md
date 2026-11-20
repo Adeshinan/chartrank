@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `text`, `empty`, `constant`) and the skewness of numeric columns.
 - `detect_type(series, thresholds=)` and the `THRESHOLDS` dictionary of
   detection thresholds.
+- `ChartSpec`: frozen, hashable, engine-independent description of a chart.
+- Chart catalog for two variables (7 rows of section 6.2), with plot types
+  (`numeric`, `category`, `boolean`, `date`); a discrete column with at most
+  10 values is drawn as a category.
+- `recommend(df, x, y, intent)`: ranked charts, ★ first; swaps x and y when
+  only the reverse order exists; clear errors with suggestions for unknown
+  columns or intents, and the list of possible intents (EF-25).
 
 ## [0.1.0] - 2026-11-15
 
