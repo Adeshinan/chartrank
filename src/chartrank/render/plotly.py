@@ -99,6 +99,20 @@ def _order(series: "pd.Series[Any]") -> list[str]:
     return [str(value) for value in sorted(series.unique())]
 
 
+def _by_group(
+    spec: ChartSpec, df: pd.DataFrame
+) -> tuple[pd.DataFrame, dict[str, list[str]]]:
+    """Data with x as text labels, and the natural order of those labels.
+
+    The order must be computed on the original values (1 < 2 < 10) and the
+    column passed to Plotly by NAME: Plotly ignores ``category_orders`` for a
+    column passed as a Series.
+    """
+    data = _data(spec, df)
+    order = _order(data[spec.x])
+    return data.assign(**{spec.x: _as_labels(data[spec.x])}), {spec.x: order}
+
+
 def _period(dates: "pd.Series[Any]") -> "pd.Series[Any]":
     """Group dates by week, month or year depending on the time span."""
     span_days = (dates.max() - dates.min()).days
@@ -120,24 +134,14 @@ def _y(spec: ChartSpec) -> str:
 
 @_register("box")
 def _box(spec: ChartSpec, df: pd.DataFrame) -> go.Figure:
-    data = _data(spec, df)
-    group = _as_labels(data[spec.x])
-    return px.box(
-        data, x=group, y=_y(spec), category_orders={spec.x: _order(data[spec.x])}
-    ).update_xaxes(title=spec.x)
+    data, order = _by_group(spec, df)
+    return px.box(data, x=spec.x, y=_y(spec), category_orders=order)
 
 
 @_register("violin")
 def _violin(spec: ChartSpec, df: pd.DataFrame) -> go.Figure:
-    data = _data(spec, df)
-    group = _as_labels(data[spec.x])
-    return px.violin(
-        data,
-        x=group,
-        y=_y(spec),
-        box=True,
-        category_orders={spec.x: _order(data[spec.x])},
-    ).update_xaxes(title=spec.x)
+    data, order = _by_group(spec, df)
+    return px.violin(data, x=spec.x, y=_y(spec), box=True, category_orders=order)
 
 
 @_register("bar_median")
@@ -162,11 +166,8 @@ def _bar_median(spec: ChartSpec, df: pd.DataFrame) -> go.Figure:
 
 @_register("strip")
 def _strip(spec: ChartSpec, df: pd.DataFrame) -> go.Figure:
-    data = _data(spec, df)
-    group = _as_labels(data[spec.x])
-    return px.strip(
-        data, x=group, y=_y(spec), category_orders={spec.x: _order(data[spec.x])}
-    ).update_xaxes(title=spec.x)
+    data, order = _by_group(spec, df)
+    return px.strip(data, x=spec.x, y=_y(spec), category_orders=order)
 
 
 @_register("histogram_overlay")

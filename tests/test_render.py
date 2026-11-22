@@ -81,11 +81,15 @@ def test_missing_values_are_left_out(titanic: pd.DataFrame) -> None:
     assert len(figure.data[0].x) == 714
 
 
-def test_categories_follow_their_natural_order(titanic: pd.DataFrame) -> None:
-    figure = render(
-        ChartSpec(kind="bar_median", x="Pclass", y="Fare", intent="c"), titanic
-    )
-    assert list(figure.data[0].x) == ["1", "2", "3"]
+@pytest.mark.parametrize("kind", ["box", "violin", "strip", "bar_median"])
+def test_categories_follow_their_natural_order(
+    kind: str, titanic: pd.DataFrame
+) -> None:
+    # Titanic rows start with class 3, then 1: the axis must still read 1, 2, 3
+    figure = render(ChartSpec(kind=kind, x="Pclass", y="Fare", intent="c"), titanic)
+    layout_order = figure.layout.xaxis.categoryarray
+    shown = list(layout_order) if layout_order else list(figure.data[0].x)
+    assert shown == ["1", "2", "3"]
 
 
 def test_bar_median_values(titanic: pd.DataFrame) -> None:
