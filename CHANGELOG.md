@@ -29,11 +29,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `examples/prototype.ipynb`: 14 pairs on Titanic, Palmer penguins and a
   sales series.
 
+- Golden pairs (`tests/golden/`): 30 reference pairs on Titanic, Palmer
+  penguins, tips and a sales series; a booklet generator for the human test
+  (charts shuffled, without the ★) and an agreement report.
+
 ### Changed
 
 - Chart kind `hexbin` renamed `density_heatmap` (Plotly has no native
   hexbin); numeric × boolean overlaid histograms renamed `histogram_by_class`.
 - Median bars show the interquartile range (no random resampling).
+
+### Fixed
+
+- Box, violin and strip plots now show categories in their natural order
+  (1, 2, 3) instead of their order of appearance in the data.
 
 ## [0.1.0] - 2026-11-15
 
