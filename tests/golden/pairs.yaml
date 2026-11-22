@@ -1,0 +1,226 @@
+# Golden pairs (task 1.4): 30 reference cases to check the ★ against human choices.
+#
+# - data: file in tests/data/ ; x, y, intent: arguments of cr.suggest()
+# - human_star: chart kind chosen by most testers (filled by `golden.py fill`)
+# - notes: why the pair is interesting
+#
+# Testers see the charts of each pair WITHOUT the ★ and in a shuffled order
+# (see golden.py): the answers go in answers.csv.
+
+# --- Titanic (891 passengers) ------------------------------------------------
+- id: titanic_fare_by_class
+  data: titanic.csv
+  x: Pclass
+  y: Fare
+  intent: compare
+  human_star: null
+  notes: "Fare is very skewed (4.79): the mean is misleading"
+- id: titanic_age_by_sex
+  data: titanic.csv
+  x: Sex
+  y: Age
+  intent: compare
+  human_star: null
+  notes: "Two groups, 20 % missing ages"
+- id: titanic_fare_by_port
+  data: titanic.csv
+  x: Embarked
+  y: Fare
+  intent: compare
+  human_star: null
+  notes: "Unbalanced groups (Q is small)"
+- id: titanic_age_distribution_by_sex
+  data: titanic.csv
+  x: Sex
+  y: Age
+  intent: distribution
+  human_star: null
+  notes: "Shape of the age distribution in each group"
+- id: titanic_age_distribution_by_class
+  data: titanic.csv
+  x: Pclass
+  y: Age
+  intent: distribution
+  human_star: null
+  notes: "Three groups of different sizes"
+- id: titanic_age_fare
+  data: titanic.csv
+  x: Age
+  y: Fare
+  intent: relationship
+  human_star: null
+  notes: "Weak relationship, skewed y"
+- id: titanic_sex_port
+  data: titanic.csv
+  x: Sex
+  y: Embarked
+  intent: composition
+  human_star: null
+  notes: "Two categories"
+- id: titanic_class_survival
+  data: titanic.csv
+  x: Pclass
+  y: Survived
+  intent: compare
+  human_star: null
+  notes: "Boolean drawn as a category"
+- id: titanic_fare_survival
+  data: titanic.csv
+  x: Fare
+  y: Survived
+  intent: compare
+  human_star: null
+  notes: "Numeric x boolean row"
+- id: titanic_age_survival
+  data: titanic.csv
+  x: Age
+  y: Survived
+  intent: compare
+  human_star: null
+  notes: "Numeric x boolean, missing ages"
+
+# --- Palmer penguins (344 penguins) ------------------------------------------
+- id: penguins_mass_by_species
+  data: penguins.csv
+  x: species
+  y: body_mass_g
+  intent: compare
+  human_star: null
+  notes: "Clear differences between species"
+- id: penguins_flipper_by_island
+  data: penguins.csv
+  x: island
+  y: flipper_length_mm
+  intent: compare
+  human_star: null
+  notes: "Groups mix several species"
+- id: penguins_bill_distribution_by_species
+  data: penguins.csv
+  x: species
+  y: bill_length_mm
+  intent: distribution
+  human_star: null
+  notes: "Well-separated distributions"
+- id: penguins_mass_distribution_by_sex
+  data: penguins.csv
+  x: sex
+  y: body_mass_g
+  intent: distribution
+  human_star: null
+  notes: "Overlapping distributions"
+- id: penguins_bill_shape
+  data: penguins.csv
+  x: bill_length_mm
+  y: bill_depth_mm
+  intent: relationship
+  human_star: null
+  notes: "Simpson's paradox: negative overall, positive within species"
+- id: penguins_flipper_mass
+  data: penguins.csv
+  x: flipper_length_mm
+  y: body_mass_g
+  intent: relationship
+  human_star: null
+  notes: "Strong positive relationship"
+- id: penguins_island_species
+  data: penguins.csv
+  x: island
+  y: species
+  intent: composition
+  human_star: null
+  notes: "Some species live on one island only"
+- id: penguins_species_sex
+  data: penguins.csv
+  x: species
+  y: sex
+  intent: compare
+  human_star: null
+  notes: "Balanced sexes"
+
+# --- Tips (244 restaurant bills) ---------------------------------------------
+- id: tips_bill_by_day
+  data: tips.csv
+  x: day
+  y: total_bill
+  intent: compare
+  human_star: null
+  notes: "Four days, Friday is small"
+- id: tips_tip_by_time
+  data: tips.csv
+  x: time
+  y: tip
+  intent: compare
+  human_star: null
+  notes: "Two groups"
+- id: tips_tip_distribution_by_smoker
+  data: tips.csv
+  x: smoker
+  y: tip
+  intent: distribution
+  human_star: null
+  notes: "Skewed tips"
+- id: tips_bill_tip
+  data: tips.csv
+  x: total_bill
+  y: tip
+  intent: relationship
+  human_star: null
+  notes: "Clear positive relationship"
+- id: tips_day_time
+  data: tips.csv
+  x: day
+  y: time
+  intent: composition
+  human_star: null
+  notes: "Weekend dinners only"
+- id: tips_sex_smoker
+  data: tips.csv
+  x: sex
+  y: smoker
+  intent: compare
+  human_star: null
+  notes: "Two binary categories"
+- id: tips_tip_by_size
+  data: tips.csv
+  x: size
+  y: tip
+  intent: compare
+  human_star: null
+  notes: "Discrete column (6 values) drawn as a category"
+
+# --- Sales (182 days, generated without random draws) ------------------------
+- id: sales_revenue_trend
+  data: sales.csv
+  x: day
+  y: revenue
+  intent: trend
+  human_star: null
+  notes: "Weekly cycle and slow growth"
+- id: sales_orders_trend
+  data: sales.csv
+  x: day
+  y: orders
+  intent: trend
+  human_star: null
+  notes: "Weekly cycle"
+- id: sales_channel_share
+  data: sales.csv
+  x: day
+  y: channel
+  intent: composition
+  human_star: null
+  notes: "The web share grows from 30 % to 60 %"
+- id: sales_revenue_by_channel
+  data: sales.csv
+  x: channel
+  y: revenue
+  intent: compare
+  human_star: null
+  notes: "Three channels"
+- id: sales_orders_revenue
+  data: sales.csv
+  x: orders
+  y: revenue
+  intent: relationship
+  human_star: null
+  notes: "Strong relationship, three channel lines"

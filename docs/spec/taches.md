@@ -59,7 +59,7 @@ Les exigences EF-xx / ENF-xx sont dans `docs/spec/cahier_des_charges.md`.
 - **Tester** : chaque ligne du catalogue ; `trend` sans date → `ValueError` listant les intentions possibles (EF-25).
 - **Fini quand** : `recommend(titanic, "Pclass", "Fare", "compare")` → box ★, violin, bar_median, strip.
 
-### [ ] 1.3 · Rendu Plotly brut + `suggest().show()` — 22–23 nov.
+### [x] 1.3 · Rendu Plotly brut + `suggest().show()` — 22–23 nov.
 - **Branche** : `feat/plotly-prototype` · **Mode** : rapide (replanification du 20 nov.) · **Exigences** : EF-51, EF-52
 - **Notions** : `plotly.express` vs `graph_objects`, `make_subplots`, affichage dans un notebook.
 - **Attendu** : une fonction par `kind` (`ChartSpec` + df → `go.Figure`) ; objet galerie avec `.show()`, `.best`, `g[i]`, `len(g)`.

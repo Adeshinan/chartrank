@@ -38,3 +38,6 @@ PROJECT_GUIDE.md
 PREMIER_MESSAGE.md
 LISEZ-MOI_KIT.md
 docs/journal/
+
+# --- Golden test booklet (large, regenerate with tests/golden/golden.py) ---
+tests/golden/validation.html
